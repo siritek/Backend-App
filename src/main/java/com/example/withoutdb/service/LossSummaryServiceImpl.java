@@ -18,7 +18,7 @@ public class LossSummaryServiceImpl implements LossSummaryService {
             DateTimeUtil dateTimeUtil = new DateTimeUtil();
 
             Connection con = DBConn.getMyConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO losssummary (Adjuster, LossDescription, OtherDescription, typeofloss, LossCause, WeatherInvolved, WeatherDescription, DateofLoss, TimeofLoss, Reportedby, Relationshiptoinsured, Location, address1, address2, address3, countries, city, zipcode, state, jurisdiction) VALUES (?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO losssummary (Adjuster, LossDescription, OtherDescription, typeofloss, LossCause, WeatherInvolved, WeatherDescription, DateofLoss, TimeofLoss, Reportedby, Relationshiptoinsured, Location, lossAddress, countries, city, zipcode, state, jurisdiction) VALUES (?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 //            System.out.println("adjuster"+ losssummary.getAdjuster());
 //            System.out.println("description"+losssummary.getLossDescription());
 //            System.out.println("losscause"+losssummary.getLossCause());
@@ -55,14 +55,12 @@ public class LossSummaryServiceImpl implements LossSummaryService {
             ps.setString(10,losssummary.getReportedBy());
             ps.setString(11,losssummary.getRelationshipToInsured());
             ps.setString(12, losssummary.getLocation());
-            ps.setString(13, losssummary.getAddress1());
-            ps.setString(14,losssummary.getAddress2());
-            ps.setString(15, losssummary.getAddress3());
-            ps.setString(16, losssummary.getCountry());
-            ps.setString(17, losssummary.getCity());
-            ps.setString(19, losssummary.getState());
-            ps.setString(18, losssummary.getZipCode());
-            ps.setString(20, losssummary.getJurisdiction());
+            ps.setString(13, losssummary.getLossAddress());
+            ps.setString(14, losssummary.getCountry());
+            ps.setString(15, losssummary.getCity());
+            ps.setString(16, losssummary.getState());
+            ps.setString(17, losssummary.getZipCode());
+            ps.setString(18, losssummary.getJurisdiction());
 
             ps.executeUpdate(); // Execute the insert statement
 
@@ -98,14 +96,12 @@ public class LossSummaryServiceImpl implements LossSummaryService {
                 //x.setDateOfLoss(rs.getDate(8));
                 //   x.setTimeOfLoss(rs.getTime(9));
                 x.setLocation(rs.getString(10));
-                x.setAddress1(rs.getString(11));
-                x.setAddress2(rs.getString(12));
-                x.setAddress3(rs.getString(13));
-                x.setCountry(rs.getString(14));
-                x.setCity(rs.getString(15));
-                x.setState(rs.getString(16));
+                x.setLossAddress(rs.getString(11));
+                x.setCountry(rs.getString(12));
+                x.setCity(rs.getString(13));
+                x.setState(rs.getString(14));
                 //x.setZipCode(rs.getInt(17));
-                x.setJurisdiction(rs.getString(18));
+                x.setJurisdiction(rs.getString(15));
 
                 alllosssummarys.add(x);
             }

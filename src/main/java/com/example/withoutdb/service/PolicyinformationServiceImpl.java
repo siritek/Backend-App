@@ -16,7 +16,7 @@ public class PolicyinformationServiceImpl  implements PolicyinformationService {
         try {
             DateTimeUtil dateTimeUtil = new DateTimeUtil();
             Connection con = DBConn.getMyConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO policy_information (PolicyNumber,PolicyVerifed,DateofLoss,TimeofLoss,underwrittingCompany,EffectiveDate,ExpiriationDate,OriginalEffectiveDate,PolicyStatus,PolicyType,Name,Address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO policy_information (PolicyNumber,PolicyVerifed,DateofLoss,TimeofLoss,underwrittingCompany,EffectiveDate,ExpiriationDate, CancellationDate,OriginalEffectiveDate,PolicyStatus,PolicyType,Name,Address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
 //            System.out.println(policyinformation.getPolicyStatus()+" "+policyinformation.getPolicyType()+" "+policyinformation.getPolicyNumber()+" "+policyinformation.getUnderWriteCompany()+" "+policyinformation.getAddress()+" "+policyinformation.getName()+" "+policyinformation.getTimeOfLoss()+" "+policyinformation.getOriginalEffectiveDate()+" "+policyinformation.getCancellationDate());
 
 

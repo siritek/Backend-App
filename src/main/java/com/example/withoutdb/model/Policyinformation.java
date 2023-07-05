@@ -13,6 +13,15 @@ public class Policyinformation {
     private String lossTime;
     private String underwriting;
     private String effectiveDate;
+
+    public String getCancellationDate() {
+        return cancellationDate;
+    }
+
+    public void setCancellationDate(String cancellationDate) {
+        this.cancellationDate = cancellationDate;
+    }
+
     private String expirationDate;
     private String cancellationDate;
     private String originalEffectiveDate;
@@ -93,13 +102,7 @@ public class Policyinformation {
         this.expirationDate = expirationDate;
     }
 
-    public String getCancellationDate() {
-        return cancellationDate;
-    }
 
-    public void setCancellationDate(String cancellationDate) {
-        this.cancellationDate = cancellationDate;
-    }
 
     public String getOriginalEffectiveDate() {
         return originalEffectiveDate;

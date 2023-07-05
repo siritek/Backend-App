@@ -18,7 +18,7 @@ public class CommonServiceImpl  implements  CommonService {
             Connection con = DBConn.getMyConnection();
             System.out.println("Connection reached Common Service");
 
-            PreparedStatement ps = con.prepareStatement("INSERT INTO NXT_Master (PolicyNumber, DateofLoss, LossLocation, TimeofLoss, Reportedby, DateReported, PolicyVerified, UnderwritingCompany, EffectiveDate, ExpirationDate, OriginalEffectiveDate, PolicyStatus, PolicyType, Name, Address, Phone, Adjuster, LossDescription, LossCause, OtherDescription, TypeofLoss, WeatherInvolved, WeatherDescription, RelationshipToInsured, LossAddress, Countries, City, Zipcode, State, LossParty, PrimaryCoverage, ExposuresStatus, CreationDate, Claimant, ClaimantType,  ExposureAddress) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO NXT_Master (PolicyNumber, DateofLoss, LossLocation, TimeofLoss, Reportedby, DateReported, PolicyVerified, UnderwritingCompany, EffectiveDate, ExpirationDate, CancellationDate, OriginalEffectiveDate, PolicyStatus, PolicyType, Name, Address, Phone, Adjuster, LossDescription, LossCause, OtherDescription, TypeofLoss, WeatherInvolved, WeatherDescription, RelationshipToInsured, LossAddress, Countries, City, Zipcode, State, LossParty, PrimaryCoverage, ExposuresStatus, CreationDate, Claimant, ClaimantType,  ExposureAddress) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             ps.setString(1, fnol.getPolicyNumber());
             ps.setDate(2, Date.valueOf(dateTimeUtil.toDate(fnol.getDateOfLoss())));
@@ -31,35 +31,36 @@ public class CommonServiceImpl  implements  CommonService {
             ps.setString(8, policyinformation.getUnderwriting());
             ps.setDate(9, Date.valueOf(dateTimeUtil.toDate(policyinformation.getEffectiveDate())));
             ps.setDate(10, Date.valueOf(dateTimeUtil.toDate(policyinformation.getExpirationDate())));
-            ps.setDate(11, Date.valueOf(dateTimeUtil.toDate(policyinformation.getOriginalEffectiveDate())));
-            ps.setString(12, policyinformation.getPolicyStatus());
-            ps.setString(13, policyinformation.getPolicyType());
-            ps.setString(14, policyinformation.getName());
-            ps.setString(15, policyinformation.getAddress());
-            ps.setString(16, policyinformation.getPrimaryPhone());
+            ps.setDate(11, Date.valueOf(dateTimeUtil.toDate(policyinformation.getCancellationDate())));
+            ps.setDate(12, Date.valueOf(dateTimeUtil.toDate(policyinformation.getOriginalEffectiveDate())));
+            ps.setString(13, policyinformation.getPolicyStatus());
+            ps.setString(14, policyinformation.getPolicyType());
+            ps.setString(15, policyinformation.getName());
+            ps.setString(16, policyinformation.getAddress());
+            ps.setString(17, policyinformation.getPrimaryPhone());
 
-            ps.setString(17, lossSummary.getAdjuster());
-            ps.setString(18, lossSummary.getLossDescription());
-            ps.setString(19, lossSummary.getLossCause());
-            ps.setString(20, lossSummary.getOtherDescription());
-            ps.setString(21, lossSummary.getTypeOfLoss());
-            ps.setString(22, lossSummary.getWeatherInvolved());
-            ps.setString(23, lossSummary.getWeatherDescription());
-            ps.setString(24, lossSummary.getRelationshipToInsured());
-            ps.setString(25, lossSummary.getAddress1());
-            ps.setString(26, lossSummary.getCountry());
-            ps.setString(27, lossSummary.getCity());
-            ps.setString(28, lossSummary.getZipCode());
-            ps.setString(29, lossSummary.getState());
+            ps.setString(18, lossSummary.getAdjuster());
+            ps.setString(19, lossSummary.getLossDescription());
+            ps.setString(20, lossSummary.getLossCause());
+            ps.setString(21, lossSummary.getOtherDescription());
+            ps.setString(22, lossSummary.getTypeOfLoss());
+            ps.setString(23, lossSummary.getWeatherInvolved());
+            ps.setString(24, lossSummary.getWeatherDescription());
+            ps.setString(25, lossSummary.getRelationshipToInsured());
+            ps.setString(26, lossSummary.getLossAddress());
+            ps.setString(27, lossSummary.getCountry());
+            ps.setString(28, lossSummary.getCity());
+            ps.setString(29, lossSummary.getZipCode());
+            ps.setString(30, lossSummary.getState());
 
 
-            ps.setString(30, exposure.getLossParty());
-            ps.setString(31, exposure.getPrimaryCoverage());
-            ps.setString(32, exposure.getStatus());
-            ps.setDate(33, Date.valueOf(dateTimeUtil.toDate(exposure.getCreationDate())));
-            ps.setString(34, exposure.getClaimant());
-            ps.setString(35, exposure.getClaimantType());
-            ps.setString(36, exposure.getAddress());
+            ps.setString(31, exposure.getLossParty());
+            ps.setString(32, exposure.getPrimaryCoverage());
+            ps.setString(33, exposure.getStatus());
+            ps.setDate(34, Date.valueOf(dateTimeUtil.toDate(exposure.getCreationDate())));
+            ps.setString(35, exposure.getClaimant());
+            ps.setString(36, exposure.getClaimantType());
+            ps.setString(37, exposure.getAddress());
 
             ps.executeUpdate(); // Execute the insert statement
 
@@ -73,6 +74,7 @@ public class CommonServiceImpl  implements  CommonService {
                     policyinformation.getUnderwriting() + ", " +
                     dateTimeUtil.toDate(policyinformation.getEffectiveDate()) + ", " +
                     dateTimeUtil.toDate(policyinformation.getExpirationDate()) + ", " +
+                    dateTimeUtil.toDate(policyinformation.getCancellationDate()) + ", " +
                     dateTimeUtil.toDate(policyinformation.getOriginalEffectiveDate()) + ", " +
                     policyinformation.getPolicyStatus() + ", " +
                     policyinformation.getPolicyType() + ", " +
@@ -87,12 +89,12 @@ public class CommonServiceImpl  implements  CommonService {
                     lossSummary.getWeatherInvolved() + ", " +
                     lossSummary.getWeatherDescription() + ", " +
                     lossSummary.getRelationshipToInsured() + ", " +
-                    lossSummary.getAddress1() + ", " +
+                    lossSummary.getLossAddress() + ", " +
                     lossSummary.getCountry() + ", " +
                     lossSummary.getCity() + ", " +
                     lossSummary.getZipCode() + ", " +
                     lossSummary.getState() + ", " +
-                    lossSummary.getJurisdiction() + ", " +
+                    /*lossSummary.getJurisdiction() + ", " +*/
                     exposure.getLossParty() + ", " +
                     exposure.getPrimaryCoverage() + ", " +
                     exposure.getStatus() + ", " +
